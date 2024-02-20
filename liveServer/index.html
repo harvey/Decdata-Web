@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            HC: Decdata Web
+        </title>
+        <link rel="stylesheet" href="styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    </head>
+    <body>
+        <div class="overlay-container" style="display: none;">
+            <div class="overlay-content" id="overlay-content">
+                ICRP-07 Decay Data<br>
+            </div>
+        </div>
+        <!-- This holds the items displayed for when the decay chain overlay is enabled -->
+        <div class="chainOverlay-container" style="display: none" style="height: 5550px">
+            <div class="chainOverlay-content" id="chainOverlay-content">
+
+                <!-- This handles the way you view the decay chain -->
+                <select id="treeSwitcher" onchange="changeFunc();">
+                    <option value="fastTree">CSS Tree (FAST)</option>
+                    <option value="fastList">CSS List (FAST)</option>
+                    <option value="slowTree">radioactivedecay (SLOW)</option>
+                </select>
+
+                <!-- This is where the decay chain is built -->
+              <ul class="tree" id="tree">
+
+              </ul>
+              <div id="chainImageHolder">
+
+              </div>
+              <p id="closeButton" onclick="toggleChainOverlay();">CLOSE</p>
+              <br><br>
+            </div>
+        </div>
+
+        <!-- This holds the color pickers -->
+        <div class="colorOverlay-container" style="display: none">
+            <div class="colorOverlay-content" id="colorOverlay-content">
+                Colours for each group of elements:<br>
+                <table id="colorWindow">
+                    <tr>
+                        <td id="pl1"><input type="color" id="p1" style="width: 25px;"> Alkali Metals</td>
+                        <td id="pl6"><input type="color" id="p6" style="width: 25px;"> Actinides</td>
+                    </tr>
+                    <tr>
+                        <td id="pl2"><input type="color" id="p2" style="width: 25px;"> Alkaline Earth Metals</td>
+                        <td id="pl7"><input type="color" id="p7" style="width: 25px;"> Lanthanides</td>
+                    </tr>
+                    <tr>
+                        <td id="pl3"><input type="color" id="p3" style="width: 25px;"> Trans. Metals</td>
+                        <td id="pl8"><input type="color" id="p8" style="width: 25px;"> Other Non Metals</td>
+                    </tr>
+                    <tr>
+                        <td id="pl4"><input type="color" id="p4" style="width: 25px;"> Metalloids</td>
+                        <td id="pl9"><input type="color" id="p9" style="width: 25px;"> Halogens</td>
+                    </tr>
+                    <tr>
+                        <td id="pl5"><input type="color" id="p5" style="width: 25px;"> Other Metals</td>
+                        <td id="pl10"><input type="color" id="p10" style="width: 25px;"> Noble Gases</td>
+                    </tr>  
+                </table>
+                <p id="closeButton" onclick="toggleColorOverlay();">CLOSE</p>
+            </div>
+        </div>
+
+
+        <button id="theButton" hidden>Post to Python</button>
+        <input type="text" id="SearchIndexFor" name="SearchIndexFor" hidden>
+
+       
+        <!-- Periodic table -->
+        <table id="periodicTable" class="periodicTable">
+
+        </table>
+        
+        <br>    
+        
+        <table id="helpButtons" class="helpButtons">
+            <tr>
+                <td><a href="help.pdf" target="_blank" rel="noopener noreferrer">HELP</a></td>
+            </tr>
+            <tr>
+                <td id="colorButton">Colours</td>
+            </tr>
+            
+            
+        </table>
+
+<!-- JavaScript for listeners and post requests etc... -->
+        <script src="data.js"></script>
+        
+    </body>
+</html>

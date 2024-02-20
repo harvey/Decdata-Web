@@ -1,0 +1,246 @@
+/* Periodic table */
+
+.periodicTable {
+    border-collapse: collapse;
+    table-layout: fixed;
+    max-width: 50%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.periodicTable td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    width: 1; 
+}
+
+.periodicTable td:empty {
+    border: none;
+    cursor: default;
+}
+
+#t1 {
+  background-color: red;
+}
+#t2{
+  background-color: aqua;
+}
+#t3{
+  background-color: yellow;
+}
+#t4{
+  background-color: darkolivegreen;
+}
+#t5{
+  background-color: grey;
+}
+#t6{
+  background-color: hotpink;
+}
+#t7{
+  background-color: orange;
+}
+#t8{
+  background-color: lime;
+}
+#t9{
+  background-color: purple;
+}
+#t10{
+  background-color: white;
+}
+
+#colorButton {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+
+/* Overlay items */
+.overlay-container {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+  }
+  
+  .overlay-content{
+    position: absolute;
+    font-size: 20px;
+    color: white;
+  
+    padding:3px;
+    overflow-y : auto;
+    
+    max-height: 100%;
+  }
+
+  p {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  #closeButton {
+    color: white;
+    background-color: red;
+    text-align: center;
+    border: 4px;
+    cursor: pointer;
+  }
+
+  #title {
+    color: black;
+    background-color: white;
+    text-align: center;
+    border: 4px;
+    
+  }
+
+
+  /* menuTable */
+  #menuTable td {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 100%;
+    height: min-content;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+/* Chain overlay items */
+.chainOverlay-container {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    overflow-y: auto;
+    overflow-x: auto;
+  }
+
+/* TREE STUFF */
+.tree,
+.tree ul,
+.tree li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+.tree {
+    margin: 0 0 1em;
+    text-align: center;
+}
+.tree,
+.tree ul {
+    display: table;
+}
+.tree ul {
+    width: 100%;
+}
+.tree li {
+    display: table-cell;
+    padding: .5em 0;
+    vertical-align: top;
+}
+.tree li:before {
+    outline: solid 1px #666;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.tree li:first-child:before {
+    left: 50%;
+}
+.tree li:last-child:before {
+    right: 50%;
+}
+.tree code,
+.tree span {
+    border: solid .1em #666;
+    border-radius: .2em;
+    display: inline-block;
+    margin: 0 .2em .5em;
+    padding: .2em .5em;
+    position: relative;
+}
+.tree ul:before,
+.tree code:before,
+.tree span:before {
+    outline: solid 1px #666;
+    content: "";
+    height: .5em;
+    left: 50%;
+    position: absolute;
+}
+.tree ul:before {
+    top: -.5em;
+}
+.tree code:before,
+.tree span:before {
+    top: -.55em;
+}
+.tree>li {
+    margin-top: 0;
+}
+.tree>li:before,
+.tree>li:after,
+.tree>li>code:before,
+.tree>li>span:before {
+    outline: none;
+}
+
+/* color overlay stuff */
+.colorOverlay-container {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.35);
+  }
+  
+  .colorOverlay-content{
+    position: absolute;
+    font-size: 20px;
+    color: black;
+    background-color: white;
+    padding:3px;
+    overflow-y : auto;
+    
+    max-height: 100%;
+  }
+
+  /* image */
+  .slowTreeImage {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+  }
+  div#outer {
+    overflow:hidden;
+  }
+  .chainImageHolder {
+    width: 100%;
+    height: auto; /* Adjust height as needed */
+    overflow-y: auto; /* This makes the container scrollable vertically */
+  }
