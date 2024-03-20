@@ -122,17 +122,11 @@ def unitTo(RN: str, newUnit):                             #usage:   RN = 'name' 
     
     return val
     
+
 def getContains(elementName: str):
     '''Returns a string (formatted as a list) which returns all of the isotopes of an element.'''
-    output = ""
-    for i in range(len(objs)-1):
-        searched = getName(objs[i])
-        if searched.startswith(elementName + "-"):
-            output = output + ", " + searched
-    if len(output) > 0:
-        output = output[2:]
-    return output
-
+    isotopes = [obj.name for obj in objs if obj.name.startswith(elementName + '-')]
+    return ', '.join(isotopes)
 
 def standard_form_to_superscript(s: str): 
     '''Replaces the +'s and -'s of an input to superscript variations of them. (This is used for formatting with the frontend)'''
@@ -184,7 +178,7 @@ def getradioactivedecay_chain(RN: str):
 # Create the objects in the class (Radionuclides)
 objs = list() # Create a list called objs (objects) to store all the Radionuclides
 
-for i in range(1, len(lines)-1): # Loops as many times as there are lines in the ndx file
+for i in range(1, len(lines)): # Loops as many times as there are lines in the ndx file
     objName =           lines[i][:7].replace(" ", "")
     objHalfLife =       lines[i][7:15].replace(" ", "")
     objUnit =           lines[i][15:17].replace(" ", "")
