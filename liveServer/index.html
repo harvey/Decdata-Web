@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     </head>
-    <body>
+    <body style="background-color: rgb(255, 255, 255);">
         <div class="overlay-container" style="display: none;">
             <div class="overlay-content" id="overlay-content">
                 ICRP-07 Decay Data<br>
@@ -62,7 +62,13 @@
                         <td id="pl5"><input type="color" id="p5" style="width: 25px;"> Other Metals</td>
                         <td id="pl10"><input type="color" id="p10" style="width: 25px;"> Noble Gases</td>
                     </tr>  
+                    <tr>
+                        <td><p id="toggleTheme" onclick="toggleTheme();" style="background-color: rgba(128, 128, 128, 0.4)">Toggle Theme</p></td>
+                        <td><p id="resetColors" onclick="resetColors();" style="background-color: rgba(128, 128, 128, 0.4)">Reset colors</p></td>
+                    </tr>
                 </table>
+                
+                
                 <p id="closeButton" onclick="toggleColorOverlay();">CLOSE</p>
             </div>
         </div>

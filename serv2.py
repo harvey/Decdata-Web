@@ -20,6 +20,8 @@ cors = CORS(app)
 def postME():
    b64request = False
    data = request.get_json()
+
+   # print(str(data)) (for debugging)
    # str(data) is the full command
 
    output = ""
