@@ -1,25 +1,36 @@
 
 // <READING CONFIG>
-var CONFIG;
 
-var xobj = new XMLHttpRequest();
-xobj.overrideMimeType("application/json");
-xobj.open('GET', './config.json', false);
-xobj.onreadystatechange = function () {
-    if (xobj.readyState == 4 && xobj.status == 200) {
-        CONFIG = JSON.parse(xobj.responseText);
-    }
-};
-xobj.send(null);
-
-// Access configuration properties
-if (CONFIG) {
-    var hostedIP = CONFIG.ip;
-    var hostedPORT = CONFIG.port;
-    console.log(`[Debug]: Server is hosted on ${hostedIP}:${hostedPORT}`);
+if (window.location.protocol === 'file:') {
+    var hostedIP = '127.0.0.1'
+    var hostedPORT = '5000'
+    console.log(`Script is being loaded from file system. *Searching for server locally on ${hostedIP}:${hostedPORT}`);
+    console.log('Web server is recommend')
 } else {
-    console.error("Failed to load config.json");
+    console.log('Script is being hosted on a web server.');
+    var CONFIG;
+
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', './config.json', false);
+    xobj.onreadystatechange = function () {
+        if (xobj.readyState == 4 && xobj.status == 200) {
+            CONFIG = JSON.parse(xobj.responseText);
+        }
+    };
+    xobj.send(null);
+
+    // Access configuration properties
+    if (CONFIG) {
+        var hostedIP = CONFIG.ip;
+        var hostedPORT = CONFIG.port;
+        console.log(`[Debug]: Server is hosted on ${hostedIP}:${hostedPORT}`);
+    } else {
+        console.error("Failed to load config.json");
+    }
 }
+
+
 // </READING CONFIG>
 
 // <INITAL SETTING>
