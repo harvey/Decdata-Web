@@ -29,8 +29,6 @@ if (window.location.protocol === 'file:') {
         console.error("Failed to load config.json");
     }
 }
-
-
 // </READING CONFIG>
 
 // <INITAL SETTING>
@@ -40,13 +38,16 @@ var overlayContent = document.getElementById("overlay-content")
 // <MAIN CODE>
 function sendToServer(req, type){
     document.getElementById('SearchIndexFor').value = req
-    //const searchVal = document.getElementById("SearchIndexFor").value
-
+    
     const body = {};
     body[type] = req;
 
-    console.log(body)
-
+    if (localStorage.getItem('chain ' + req) && type == 'Chain')
+    {
+        console.log('Using cached value for: ' + req)
+        populateChainOverlay(localStorage.getItem('chain ' + req))
+        return 0
+    }
 
     fetch(`http://${hostedIP}:${hostedPORT}/receiver`, 
         {
@@ -96,20 +97,6 @@ function sendToServer(req, type){
         } 
     ).catch((err) => console.error(err));
 }
-
-
-function getDecayChain(Element){
-    cache = localStorage.getItem('chain ' + Element)
-    if (cache){
-        console.log('Using cached value to build tree for Element ' + Element)
-        populateChainOverlay(cache)
-    }
-    else
-    {
-        sendToServer(Element, 'Chain')
-    }
-}
-
 
 function populateOverlay(inputString, decaymethod, halflife, units){
     if (inputString.length == 0){
@@ -366,8 +353,6 @@ function toggleTheme() {
     }
 }
 
-
-
 function toggleOverlay() {
     var overlay = document.getElementsByClassName("overlay-container")[0];
     overlay.style.display = (overlay.style.display === "flex") ? "none" : "flex";
@@ -398,7 +383,6 @@ function handleEscapeKey(e) {
     }
 }
 
-
 // https://www.tutorialspoint.com/how-to-remove-an-added-list-items-using-javascript#:~:text=In%20JavaScript%2C%20we%20defined%20the,method%20to%20remove%20the%20child.
 
 tree = document.getElementById('tree')
@@ -407,7 +391,7 @@ function clearAll() {
     while (tree.firstChild) {
     tree.removeChild(tree.firstChild);
     }
- }
+}
 
  function rgbToHex(rgb) {
     // Separate the RGB components
@@ -429,8 +413,7 @@ function hexToRgb(hex) {
       g: parseInt(result[2], 16),
       b: parseInt(result[3], 16)
     } : null;
-  }
-
+}
 
 function toggleColorOverlay() {
     var overlay = document.getElementsByClassName("colorOverlay-container")[0];
