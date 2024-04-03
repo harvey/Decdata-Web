@@ -13,6 +13,16 @@ from program import searchFor
 
 from program import objs
 
+import json
+
+f = open('./liveServer/config.json')
+config = json.load(f)
+
+ip = config['ip']
+port = config['port']
+
+print(f'[Debug]: Server hosted on {ip}:{port}')
+
 app = Flask(__name__)
 cors = CORS(app)
 
@@ -74,4 +84,4 @@ def postME():
    return(output)
    
 if __name__ == "__main__":
-   serve(app, host='0.0.0.0', port=5000, threads=1)
+   serve(app, host=ip, port=port, threads=1)
