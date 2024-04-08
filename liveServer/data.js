@@ -6,6 +6,7 @@ if (window.location.protocol === 'file:') {
     var hostedPORT = '5000'
     console.log(`Script is being loaded from file system. *Searching for server locally on ${hostedIP}:${hostedPORT}`);
     console.log('Web server is recommend')
+    console.log('To change the lookup address for the server you need to change the variables in ./liveServer/data.js')
 } else {
     console.log('Script is being hosted on a web server.');
     var CONFIG;
