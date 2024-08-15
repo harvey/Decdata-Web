@@ -1,12 +1,18 @@
-"# Decdata-Web"
+## Decdata-Web
 
-start.bat should put everything into a virtual environment, install all required packages and start the program.
-html file is located : liveServer/index.html
+![image](https://github.com/user-attachments/assets/0b50a05f-14b9-4b3d-833e-689ae90f0e04)
 
-Installation:
+### Installation
 
 ```git clone https://github.com/hifrens/Decdata-Web```
 
-```cd Decdata-Web & start.bat```
+(Windows) locate and run `start.bat`
+> This will install everything and also starts the program
 
-It is recommended to run the bat flie in ./liveServer while running the server locally.
+(Linux) enter Decdata-Web directory then: 
+`pip install -r requirements.txt`
+> You will then need to run `py serv2.py` to start the application
+
+### Usability
+> [help.pdf](https://github.com/user-attachments/files/16626953/help.pdf)
+
