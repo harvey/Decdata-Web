@@ -28,32 +28,6 @@ class RadioNuclide():
         
         self.daughters = daughterDict
 
-# 'Getter' to return the name of the Radionuclide
-def getName(RN: object):
-    '''Returns the name of the RadioNuclide from the objs list.
-    objs[index].name can also be used to achieve this.'''
-    return RN.name
-
-# 'Getter' to return the half life of the Radionuclide
-def getHalfLife(RN: object):
-    '''Returns the half-life of the RadioNuclide from the objs list.
-    objs[index].halflife can also be used to achieve this.'''
-    return RN.halflife
-
-def getUnit(RN: object):
-    '''Returns the unit for the half-life of the RadioNuclide from the objs list.
-    objs[index].unit can also be used to achieve this.'''
-    return RN.unit
-
-def getDecayMethod(RN: object):
-    '''Returns the decay method for the RadioNuclide from the objs list.
-    objs[index].decaymethod can also be used to achieve this.'''
-    return RN.decaymethod
-
-def getDaughters(RN: object):
-    '''Returns the dictionary of daughters for the RadioNuclide from the objs list.
-    objs[index].daughters can also be used to achieve this.'''
-    return RN.daughters
 
 def searchFor(RN: str, f="r"):                   #f = format -- search for Name,HalfLife,Amount of Daughters, etc. 
     #                                               write binary search here WHERE RN=theValue and f=FORMAT' # FORMAT WAS NEVER USED.
@@ -65,7 +39,7 @@ def searchFor(RN: str, f="r"):                   #f = format -- search for Name,
     while left <= right:
         mid = (left + right) // 2                                   # might implement caching algorithm for real time searches
         #print(mid)
-        mid_obj = getName(objs[mid])
+        mid_obj = objs[mid].name
 
         if mid_obj == RN:
             return mid
@@ -89,9 +63,9 @@ def unitTo(RN: str, newUnit):                             #usage:   RN = 'name' 
     'e.g. h ---> d:   RN/24 turns from h to d'
     
     index = objs[searchFor(RN,"name")]
-    val = float(getHalfLife(index))
+    val = float(index.halflife)
 
-    originalUnit = getUnit(index)
+    originalUnit = index.unit
 
     # First I will convert all values into seconds
     if originalUnit == 'm':
@@ -141,7 +115,7 @@ def get_decay_chain(RN: object, yield_multiplier=1.0 , depth=0, visited=None):
 
     decayChain = []
     decayChain.append([depth * "+" + RN.name + " ,HalfLife: " + standard_form_to_superscript(RN.halflife) + " " + RN.unit + ",Yield: " + standard_form_to_superscript(str('%.3E' % Decimal(yield_multiplier)))])  # Adjusted indentation
-    daughters = getDaughters(RN)
+    daughters = RN.daughters
 
     for key, value in daughters.items():
         daughter = objs[searchFor(key)] 

@@ -2,11 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from waitress import serve
 
-from program import getName
-from program import getHalfLife
-from program import getUnit
 from program import getContains
-from program import getDecayMethod
 from program import get_decay_chain
 from program import getradioactivedecay_chain
 from program import searchFor
@@ -45,9 +41,9 @@ def postME():
       unit = ""
       for i in range(len(temp)):
          index = searchFor(str(temp[i]).replace(",",""))
-         methods = methods   + getDecayMethod(objs[index]) + ","
-         halflife = halflife + getHalfLife(objs[index]) + ","
-         unit = unit         + getUnit(objs[index]) + ","
+         methods = methods   + objs[index].decaymethod + ","
+         halflife = halflife + objs[index].halflife + ","
+         unit = unit         + objs[index].unit + ","
          
       #Remove final commas.
       methods = methods[:-1]
@@ -58,7 +54,7 @@ def postME():
 
    elif data.get('Info'):
       print('Info: [{info}]'.format(info=data.get('Info')))
-      output = "{ \"HalfLife\":\"" + getHalfLife(objs[searchFor(str(data.get('Info')).replace(" ",""))]) + "\"}"
+      output = "{ \"HalfLife\":\"" + objs[searchFor(str(data.get('Info')).replace(" ",""))].halflife + "\"}"
    
    elif data.get('Chain'):   
       print('CSS Chain: [{chain}]'.format(chain=data.get('Chain')))
