@@ -28,6 +28,47 @@ class RadioNuclide():
         
         self.daughters = daughterDict
 
+    def get_decay_chain(self, yield_multiplier=1.0 , depth=0, visited=None):
+        '''Return the decay chain of a given element.
+        Formatted with ':::' for seperating each element, and +'s represent depth.'''
+        if visited is None:
+            visited = set()
+
+        decayChain = []
+        decayChain.append([depth * "+" + self.name + " ,HalfLife: " + standard_form_to_superscript(self.halflife) + " " + self.unit + ",Yield: " + standard_form_to_superscript(str('%.3E' % Decimal(yield_multiplier)))])  # Adjusted indentation
+        daughters = self.daughters
+
+        for key, value in daughters.items():
+            daughter = objs[searchFor(key)] 
+            yield_value = float(value) * yield_multiplier
+
+            if daughter.name not in visited:
+                visited.add(daughter.name)
+                decayChain.extend(daughter.get_decay_chain(yield_value, depth + 1, None))
+
+        if depth == 0:
+            visited.clear()
+
+        return decayChain
+
+    def getradioactivedecay_chain(self):
+        '''Returns the b64 image of the decay chain, given a radionuclide name as a string (Uses radioactivedecay library).'''
+        import radioactivedecay as rd       # ONLY IMPORT WHEN YOU NEED IT SO DOESN'T 
+        import matplotlib.pyplot as plt     # USE UP TOO MUCH SYSTEM MEMORY FOR NOTHING.
+        import io
+        import base64
+
+        nuc = rd.Nuclide(self.name)
+        nuc.plot()
+
+        buffer = io.BytesIO()
+        plt.savefig(buffer, format='png')
+        buffer.seek(0)
+
+        # PLOT TO BASE64
+        b64Image = base64.b64encode(buffer.getvalue()).decode('utf-8')
+
+        return(b64Image)
 
 def searchFor(RN: str, f="r"):                   #f = format -- search for Name,HalfLife,Amount of Daughters, etc. 
     #                                               write binary search here WHERE RN=theValue and f=FORMAT' # FORMAT WAS NEVER USED.
@@ -55,8 +96,6 @@ def searchFor(RN: str, f="r"):                   #f = format -- search for Name,
     objs.sort(key=lambda x: x.name) #sort list by name just incase 'mid' is not the correct place to put in the list.
     return mid
 # return last item in list
-
-
 
 def unitTo(RN: str, newUnit):                             #usage:   RN = 'name' of a Radionuclide. e.g. "Ac-232".
     'change RN (original value) to newUnit'
@@ -96,7 +135,6 @@ def unitTo(RN: str, newUnit):                             #usage:   RN = 'name' 
     
     return val
     
-
 def getContains(elementName: str):
     '''Returns a string (formatted as a list) which returns all of the isotopes of an element.'''
     isotopes = [obj.name for obj in objs if obj.name.startswith(elementName + '-')]
@@ -106,48 +144,6 @@ def standard_form_to_superscript(s: str):
     '''Replaces the +'s and -'s of an input to superscript variations of them. (This is used for formatting with the frontend)'''
     output = s.replace('-', '⁻').replace('+', '⁺')
     return output
-
-def get_decay_chain(RN: object, yield_multiplier=1.0 , depth=0, visited=None):
-    '''Return the decay chain of a given element.
-    Formatted with ':::' for seperating each element, and +'s represent depth.'''
-    if visited is None:
-        visited = set()
-
-    decayChain = []
-    decayChain.append([depth * "+" + RN.name + " ,HalfLife: " + standard_form_to_superscript(RN.halflife) + " " + RN.unit + ",Yield: " + standard_form_to_superscript(str('%.3E' % Decimal(yield_multiplier)))])  # Adjusted indentation
-    daughters = RN.daughters
-
-    for key, value in daughters.items():
-        daughter = objs[searchFor(key)] 
-        yield_value = float(value) * yield_multiplier
-
-        if daughter.name not in visited:
-            visited.add(daughter.name)
-            decayChain.extend(get_decay_chain(daughter, yield_value, depth + 1, visited))
-
-    if depth == 0:
-        visited.clear()
-
-    return decayChain
-
-def getradioactivedecay_chain(RN: str):
-    '''Returns the b64 image of the decay chain, given a radionuclide name as a string (Uses radioactivedecay library).'''
-    import radioactivedecay as rd       # ONLY IMPORT WHEN YOU NEED IT SO DOESN'T 
-    import matplotlib.pyplot as plt     # USE UP TOO MUCH SYSTEM MEMORY FOR NOTHING.
-    import io
-    import base64
-
-    nuc = rd.Nuclide(RN)
-    nuc.plot()
-
-    buffer = io.BytesIO()
-    plt.savefig(buffer, format='png')
-    buffer.seek(0)
-
-    # PLOT TO BASE64
-    b64Image = base64.b64encode(buffer.getvalue()).decode('utf-8')
-
-    return(b64Image)
 
 # Create the objects in the class (Radionuclides)
 objs = list() # Create a list called objs (objects) to store all the Radionuclides

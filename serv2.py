@@ -3,8 +3,6 @@ from flask_cors import CORS
 from waitress import serve
 
 from program import getContains
-from program import get_decay_chain
-from program import getradioactivedecay_chain
 from program import searchFor
 
 from program import objs
@@ -59,7 +57,7 @@ def postME():
    elif data.get('Chain'):   
       print('CSS Chain: [{chain}]'.format(chain=data.get('Chain')))
       chainStr = ""
-      chain = get_decay_chain(objs[searchFor(str(data.get('Chain')).replace(" ",""))])
+      chain = objs[searchFor(str(data.get('Chain')).replace(" ",""))].get_decay_chain()
       for i in range(len(chain)):
          chainStr = chainStr + str(chain[i]) + ":::"
 
@@ -69,13 +67,13 @@ def postME():
    elif data.get('ChainV2'):
       b64request = True
       print('Image Chain: [{chainV2}]'.format(chainV2=data.get('ChainV2')))
-      b64 = getradioactivedecay_chain(data.get('ChainV2'))
+      b64 = objs[searchFor(str(data.get('ChainV2')).replace(" ",""))].getradioactivedecay_chain()
       output = "{ \"b64\":\"" + b64 + "\"}"
 
    if not b64request:
       print(f'Output: [{output}]\n')
    else:
-      print(f'Output: [b64 image (if issues change b64request to False)]\n')
+      print(f'Output: [b64 image (if issues, change b64request to False)]\n')
       
    return(output)
    
