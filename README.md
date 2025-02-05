@@ -6,7 +6,7 @@
       <img src="https://github.com/user-attachments/assets/9ee566b8-6e77-4dfe-9049-d60bd8bf3baf" width=100px>
     </td>
     <td>
-      This was a project made for the UKHSA to analyse properties of Radionuclides to assist in health and <br>medical research. This program was designed to replace an existing and outdated software.<br><br>
+      This was a project made for the UKHSA to analyse properties of Radionuclides to assist in health and medical research. This program was designed to replace an existing and outdated software.<br><br>
       https://www.gov.uk/government/organisations/uk-health-security-agency
     </td>
   </tr> 
