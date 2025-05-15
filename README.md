@@ -1,16 +1,20 @@
 # Decdata-Web
 
-<table>
-  <tr>
-    <td>
-      <img src="https://github.com/user-attachments/assets/9ee566b8-6e77-4dfe-9049-d60bd8bf3baf" width=100px>
-    </td>
-    <td>
-      This was a project made for the UKHSA to analyse properties of Radionuclides to assist in health and medical research. This program was designed to replace an existing and outdated software.<br><br>
-      https://www.gov.uk/government/organisations/uk-health-security-agency
-    </td>
-  </tr> 
-</table>
+<div style="display: flex; align-items: center;">
+  <img
+    src="https://github.com/user-attachments/assets/9ee566b8-6e77-4dfe-9049-d60bd8bf3baf"
+    alt="UKHSA Radionuclide Analyzer"
+    style="height: 120px; margin-right: 1em;"
+  />
+  <div>
+    <strong>Developed for the UK Health Security Agency</strong>  
+    to analyse properties of radionuclides and assist in health  
+    and medical research.
+    <br /><br />
+  </div>
+</div>
+
+
 
 
 ![image](https://github.com/user-attachments/assets/0b50a05f-14b9-4b3d-833e-689ae90f0e04)
